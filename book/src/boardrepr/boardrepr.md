@@ -36,7 +36,7 @@ Oh, yeah. Forgot about that.
 
 Huh???
 
-> **FRIEND:** It's called *en passant*.
+> **FRIEND:** It's called <a href="https://en.wikipedia.org/wiki/En_passant" target="_blank"><em>*en passant*</em></a>.
 
 ...
 

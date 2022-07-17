@@ -1,6 +1,6 @@
 # Introductions
 
-**enpassant** is an educational chess library written in Rust, and this book is intended to be a journey into the rabbit hole of chess programming, but is coincidentally a way of learning Rust by example. It will not be a comprehensive overview of Rust. We will only talk about how Rust's features can be used to build a chess engine.
+**enpassant** is an educational chess library written in Rust. This book is intended to be a journey into the rabbit hole of chess programming, but it is coincidentally a way of learning <a href="https://doc.rust-lang.org/rust-by-example/" target="_blank">Rust by Example</a>. It will not be a comprehensive overview of Rust (see <a href="https://doc.rust-lang.org/book/" target="_blank">the official Rust book</a>), but it only assumes a barebones knowledge of the language.
 
 In this book we will go over five fundamental questions in chess programming:
 

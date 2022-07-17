@@ -6,7 +6,8 @@
 # The Basics
 
 - [Board Representation](./boardrepr/boardrepr.md)
-  - [Keeping Track of Pieces](./boardrepr/keeptrackpieces.md)
+  - [Keeping Track of Pieces I](./boardrepr/keeptrackpieces1.md)
+  - [Squares and Bitboards]()
 - [Move Generation]()
 - [Evaluation]()
 - [Search]()
@@ -16,4 +17,9 @@
 
 - [Room for Improvement]()
 
-[Credits](relative/path/to/markdown2.md)
+# Appendix
+
+- [Terms and Notation](./termsandnotation.md)
+
+[Further Reading](./further.md)
+[Credits](./credits.md)
