@@ -1,0 +1,6 @@
+[book]
+authors = ["mattngaw"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Chess Programming in Rust"
