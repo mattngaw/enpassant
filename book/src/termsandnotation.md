@@ -1,6 +1,6 @@
 # Terms and Notation
 
-Conventionally unless otherwise specified, boards will be displayed from white's perspective.
+Conventionally, unless otherwise specified, boards will be displayed from white's perspective.
 
 A *rank* is a row on a chessboard.
 
@@ -70,7 +70,7 @@ The coordinates flip if we are viewing the board from black's perspective.
    
    h g f e d c b a
 
-the g5 square from black's perspective
+the same g5 square from black's perspective
 ```
 <br/>
 
@@ -148,7 +148,7 @@ a pawn captures a queen on g5
 ```
 <br/>
 
-If there are multiple moves that result in the same notation, the file and/or rank of origin is used.
+If there are multiple moves by the same piece type to the same square, the file and/or rank of origin is used.
 
 ```text
 8  . . . . . . . .            8  . . . . . . . . 
@@ -204,4 +204,5 @@ default to using file
    a b c d e f g h               a b c d e f g h
 ```
 <br/>
+
 

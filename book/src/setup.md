@@ -21,7 +21,15 @@ To be honest, I'm not even sure what `cargo` is.
 
 What do those three things do?
 
-> **FRIEND:** `rustc` is the Rust's compiler, `rustup` is the installer for Rust and its tools, and `cargo` is Rust's package manager. Once you run the commands given above, you've created a project named "chess" that is managed by `cargo`.
+> **FRIEND:** `rustc` is the Rust's compiler, `rustup` is the installer for Rust and its tools, and `cargo` is Rust's package manager. Once you run the commands given above, you've created a project named "chess" that is managed by `cargo`. Your directory should look like this.
+
+```text
+.
+└── chess/
+    ├── src/
+    │   └── lib.rs
+    └── Cargo.toml
+```
 
 Gotcha. Now we're ready to go?
 

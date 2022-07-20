@@ -30,6 +30,11 @@ impl Square {
     }
 
     #[inline]
+    pub fn index(self) -> usize {
+        self.0 as usize
+    }
+    
+    #[inline]
     pub fn file(self) -> File {
         File::new(self.0 % 8)
     }
@@ -47,10 +52,6 @@ impl Square {
     #[inline]
     pub fn flipped(self) -> Self {
         Square(63 - self.0)
-    }
-
-    pub fn index(self) -> usize {
-        self.0 as usize
     }
 }
 

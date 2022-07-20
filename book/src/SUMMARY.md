@@ -6,8 +6,9 @@
 # The Basics
 
 - [Board Representation](./boardrepr/boardrepr.md)
-  - [Keeping Track of Pieces I](./boardrepr/keeptrackpieces1.md)
-  - [Squares and Bitboards]()
+  - [Keeping Track of Pieces](./boardrepr/keepingtrack/keepingtrack.md)
+    - [Bits and Pieces](./boardrepr/keepingtrack/bitsandpieces.md)
+    - [Squaring Away the Code](./boardrepr/keepingtrack/squaringaway.md)
 - [Move Generation]()
 - [Evaluation]()
 - [Search]()
