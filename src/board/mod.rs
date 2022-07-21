@@ -1,10 +1,9 @@
 use std::mem::transmute;
 
-pub mod bits;
 pub mod mailbox;
 pub mod castling;
 
-use bits::*;
+use crate::bits::*;
 use mailbox::Mailbox;
 use castling::*;
 
@@ -143,3 +142,4 @@ pub struct Board {
     roles: Bitboard,
     pieces: Mailbox,
 }
+

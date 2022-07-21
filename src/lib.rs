@@ -1,4 +1,5 @@
 pub mod board;
+pub mod bits;
 
 #[cfg(test)]
 mod tests {

@@ -1,6 +1,6 @@
 use std::ops::{BitOr, BitAnd, BitXor, Not};
 
-use super::{Rank, File, Flippable, Index};
+use crate::board::{Rank, File, Flippable, Index};
 
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Default)]
 pub struct Square(u8);

@@ -1,4 +1,5 @@
-use super::{Square, Piece, Flippable, Index};
+use super::{Piece, Flippable, Index};
+use crate::bits::Square;
 
 #[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Mailbox([Option<Piece>; 64]);
@@ -36,3 +37,4 @@ impl IntoIterator for Mailbox {
         self.0.into_iter()
     }
 }
+
