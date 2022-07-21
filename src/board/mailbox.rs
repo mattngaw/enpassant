@@ -1,4 +1,4 @@
-use super::{Square, Piece};
+use super::{Square, Piece, Flippable};
 
 #[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Mailbox([Option<Piece>; 64]);
@@ -15,8 +15,10 @@ impl Mailbox {
     pub fn set(&mut self, s: Square, p: Option<Piece>) -> () {
         self.0[s.index()] = p;
     }
+}
 
-    pub fn flipped(self) -> Self {
+impl Flippable for Mailbox {
+    fn flipped(&self) -> Self {
         let mut flipped = Mailbox::new();
         for i in 0..64usize {
             flipped.0[i] = self.0[63 - i];

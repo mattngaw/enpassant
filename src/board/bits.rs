@@ -1,6 +1,6 @@
 use std::ops::{BitOr, BitAnd, BitXor, Not};
 
-use super::{Rank, File};
+use super::{Rank, File, Flippable};
 
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Default)]
 pub struct Square(u8);
@@ -48,9 +48,11 @@ impl Square {
     pub fn coords(self) -> (File, Rank) {
         (self.file(), self.rank())
     }
+}
 
+impl Flippable for Square {
     #[inline]
-    pub fn flipped(self) -> Self {
+    fn flipped(&self) -> Self {
         Square(63 - self.0)
     }
 }
@@ -140,9 +142,11 @@ impl Bitboard {
     pub fn is_singular(self) -> bool {
         self.0.is_power_of_two()
     }
+}
 
+impl Flippable for Bitboard {
     #[inline]
-    pub fn flipped(self) -> Self {
+    fn flipped(&self) -> Self {
         Bitboard(self.0.reverse_bits())
     }
 }

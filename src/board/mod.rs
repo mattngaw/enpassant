@@ -2,9 +2,11 @@ use std::mem::transmute;
 
 pub mod bits;
 pub mod mailbox;
+pub mod castling;
 
 use bits::*;
 use mailbox::Mailbox;
+use castling::*;
 
 /// A column on a chessboard
 #[repr(u8)]
@@ -92,4 +94,13 @@ pub struct Board {
     colors: Bitboard,
     roles: Bitboard,
     pieces: Mailbox,
+}
+
+pub trait Flippable
+where Self: Copy + Sized
+{
+    fn flipped(&self) -> Self;
+    fn flip(&mut self) -> () {
+        *self = self.flipped()
+    }
 }
