@@ -1,4 +1,4 @@
-use super::{Square, Piece, Flippable};
+use super::{Square, Piece, Flippable, Index};
 
 #[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Mailbox([Option<Piece>; 64]);

@@ -8,6 +8,19 @@ use bits::*;
 use mailbox::Mailbox;
 use castling::*;
 
+pub trait Flippable
+where Self: Copy + Sized
+{
+    fn flipped(&self) -> Self;
+    fn flip(&mut self) -> () {
+        *self = self.flipped()
+    }
+}
+
+pub trait Index {
+    fn index(&self) -> usize;
+}
+
 /// A column on a chessboard
 #[repr(u8)]
 #[derive(PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Copy, Clone)]
@@ -31,6 +44,13 @@ impl File {
     pub fn new_unchecked(x: u8) -> Self {
         debug_assert!(x < 8);
         unsafe { transmute::<u8, File>(x) }
+    }
+}
+
+impl Index for File {
+    #[inline]
+    fn index(&self) -> usize {
+        *self as usize
     }
 }
 
@@ -60,10 +80,24 @@ impl Rank {
     }
 }
 
+impl Index for Rank {
+    #[inline]
+    fn index(&self) -> usize {
+        *self as usize
+    }
+}
+
 #[derive(PartialEq, Debug, Copy, Clone)]
 pub enum Color {
-    White,
-    Black,
+    White = 0,
+    Black = 1,
+}
+
+impl Index for Color {
+    #[inline]
+    fn index(&self) -> usize {
+        *self as usize
+    }
 }
 
 #[derive(PartialEq, Debug, Copy, Clone)]
@@ -76,12 +110,26 @@ pub enum Role {
     King,
 }
 
+impl Index for Role {
+    #[inline]
+    fn index(&self) -> usize {
+        *self as usize
+    }
+}
+
 #[derive(PartialEq, Debug, Copy, Clone)]
 pub enum Direction {
     North,
     East,
     South,
     West
+}
+
+impl Index for Direction {
+    #[inline]
+    fn index(&self) -> usize {
+        *self as usize
+    }
 }
 
 #[derive(PartialEq, Debug, Copy, Clone)]
@@ -94,13 +142,4 @@ pub struct Board {
     colors: Bitboard,
     roles: Bitboard,
     pieces: Mailbox,
-}
-
-pub trait Flippable
-where Self: Copy + Sized
-{
-    fn flipped(&self) -> Self;
-    fn flip(&mut self) -> () {
-        *self = self.flipped()
-    }
 }

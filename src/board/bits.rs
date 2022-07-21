@@ -1,6 +1,6 @@
 use std::ops::{BitOr, BitAnd, BitXor, Not};
 
-use super::{Rank, File, Flippable};
+use super::{Rank, File, Flippable, Index};
 
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Default)]
 pub struct Square(u8);
@@ -28,11 +28,6 @@ impl Square {
         assert!(b.is_singular());
         Square(b.0.trailing_zeros() as u8)
     }
-
-    #[inline]
-    pub fn index(self) -> usize {
-        self.0 as usize
-    }
     
     #[inline]
     pub fn file(self) -> File {
@@ -54,6 +49,13 @@ impl Flippable for Square {
     #[inline]
     fn flipped(&self) -> Self {
         Square(63 - self.0)
+    }
+}
+
+impl Index for Square {
+    #[inline]
+    fn index(&self) -> usize {
+        self.0 as usize
     }
 }
 
