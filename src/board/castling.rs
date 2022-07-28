@@ -1,3 +1,5 @@
+//! Keeping track of castling rights.
+
 use super::{Color, Flippable};
 
 #[derive(PartialEq, Eq, Hash, Debug, Copy, Clone)]

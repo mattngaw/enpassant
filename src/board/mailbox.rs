@@ -1,4 +1,8 @@
-use super::{Piece, Flippable, Index};
+//! Struct for keeping track of what's on each square.
+
+use std::ops::{Index, IndexMut};
+
+use super::{Piece, Flippable}; 
 use crate::bits::Square;
 
 #[derive(Debug, Copy, Clone, PartialEq)]
@@ -7,10 +11,6 @@ pub struct Mailbox([Option<Piece>; 64]);
 impl Mailbox {
     pub fn new() -> Mailbox {
         Mailbox([None; 64])
-    }
-
-    pub fn get(self, s: Square) -> Option<Piece> {
-        self.0[s.index()]
     }
 
     pub fn set(&mut self, s: Square, p: Option<Piece>) -> () {
@@ -38,3 +38,16 @@ impl IntoIterator for Mailbox {
     }
 }
 
+impl Index<Square> for Mailbox {
+    type Output = Option<Piece>;
+
+    fn index(&self, s: Square) -> &Self::Output {
+        &self.0[s.index()]
+    }
+}
+
+impl IndexMut<Square> for Mailbox {
+    fn index_mut(&mut self, s: Square) -> &mut Self::Output {
+        &mut self.0[s.index()]
+    }
+}
