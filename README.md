@@ -5,6 +5,7 @@
     <p><em>An educational chess library written in Rust</em></p>
 </div>
 
-![crates](https://img.shields.io/crates/v/enpassant?style=flat-square) ![docs](https://img.shields.io/docsrs/enpassant?style=flat-square)
+[![crates](https://img.shields.io/crates/v/enpassant?style=flat-square)](https://crates.io/crates/enpassant)
+[![docs](https://img.shields.io/docsrs/enpassant?style=flat-square)](https://docs.rs/enpassant/latest/enpassant/)
 
 A work in progress.
