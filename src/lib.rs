@@ -1,5 +1,7 @@
 pub mod board;
 pub mod bits;
+pub mod movegen;
+pub mod util;
 
 #[cfg(test)]
 mod tests {
@@ -9,3 +11,4 @@ mod tests {
         assert_eq!(result, 4);
     }
 }
+

@@ -14,7 +14,7 @@ impl Mailbox {
     }
 
     pub fn set(&mut self, s: Square, p: Option<Piece>) -> () {
-        self.0[s.index()] = p;
+        self.0[usize::from(s)] = p;
     }
 }
 
@@ -42,12 +42,12 @@ impl Index<Square> for Mailbox {
     type Output = Option<Piece>;
 
     fn index(&self, s: Square) -> &Self::Output {
-        &self.0[s.index()]
+        &self.0[usize::from(s)]
     }
 }
 
 impl IndexMut<Square> for Mailbox {
     fn index_mut(&mut self, s: Square) -> &mut Self::Output {
-        &mut self.0[s.index()]
+        &mut self.0[usize::from(s)]
     }
 }

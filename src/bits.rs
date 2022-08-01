@@ -3,8 +3,10 @@
 //! 
 
 use std::ops::{BitOr, BitAnd, BitXor, Not};
+use std::fmt::Display;
 
 use crate::board::{Rank, File, Flippable};
+use crate::util::PRINT_ORDER;
 
 /// The monad of the chessboard upon which chess pieces exist.
 ///
@@ -82,23 +84,6 @@ impl Square {
     pub fn coords(self) -> (File, Rank) {
         (self.file(), self.rank())
     }
-
-    /// Returns the index (`i`, the inner value of the square).
-    /// 
-    /// # Postcondition
-    /// `0 <= i <= 63`
-    #[inline]
-    pub fn index(&self) -> usize {
-        let i = self.index_unchecked();
-        assert!(i < 64, "invalid square index");
-        i
-    }
-
-    /// Returns the index (could be invalid index).
-    #[inline]
-    pub fn index_unchecked(&self) -> usize {
-        self.0 as usize
-    }
 }
 
 impl TryFrom<Bitboard> for Square {
@@ -118,6 +103,19 @@ impl Flippable for Square {
     #[inline]
     fn flipped(&self) -> Self {
         Square(63 - self.0)
+    }
+}
+
+impl From<Square> for usize {
+    fn from(s: Square) -> Self {
+        debug_assert!(s.0 < 64);
+        s.0 as usize
+    }
+}
+
+impl Display for Square {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Square({})", self.0)
     }
 }
 
@@ -226,15 +224,16 @@ impl Bitboard {
     #[inline]
     pub fn largest_square(self) -> Option<Square> {
         self.is_any().then_some({
-            let value = self.0.trailing_zeros() as u8; 
+            let value = 63 - self.0.leading_zeros() as u8;
             Square::new_unchecked(value)
         })
     }
 
     /// Returns the occupied square, if any, closest to index 0.
+    #[inline]
     pub fn smallest_square(self) -> Option<Square> {
         self.is_any().then_some({
-            let value = 63 - self.0.leading_zeros() as u8; 
+            let value = self.0.trailing_zeros() as u8; 
             Square::new_unchecked(value)
         })
     }
@@ -281,8 +280,7 @@ impl From<Square> for Bitboard {
     /// The returned bitboard is singular
     #[inline]
     fn from(s: Square) -> Self {
-        debug_assert!(s.0 < 64);
-        Bitboard(Self::SINGULAR_MASKS[s.index()])
+        Bitboard(Self::SINGULAR_MASKS[usize::from(s)])
     }
 }
 
@@ -350,5 +348,49 @@ impl Not for Bitboard {
     #[inline]
     fn not(self) -> Self::Output {
         Bitboard(!self.0)
+    }
+}
+
+impl Iterator for Bitboard {
+    type Item = Square;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        match self.0 {
+            0 => None,
+            _ => Some(Square(63 - self.0.leading_zeros() as u8)),
+        }
+    }
+}
+
+impl Display for Bitboard {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut b_chars = vec!['.'; 64];
+        for s in self.into_iter() {
+            b_chars[s.0 as usize] = 'x';
+        }
+        let mut b_str = String::new();
+        for i in 0..8usize {
+            let i = 7 - i;
+            for j in 0..8usize {
+                let k = i * 8 + j;
+                b_str.push(b_chars[k]);
+                b_str.push(' ');
+            }
+            b_str.push('\n');
+        }
+        for i in PRINT_ORDER {
+            for j in i {
+
+            }
+        }
+        write!(f, "{}", b_str)
+    }
+}
+
+mod tests {
+    use super::*;
+
+    fn test_square_new() {
+        
     }
 }
