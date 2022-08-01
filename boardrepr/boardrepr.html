@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Board Representation - Chess Programming in Rust</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../introductions.html">Introductions</a></li><li class="chapter-item expanded affix "><a href="../setup.html">Setup</a></li><li class="chapter-item expanded affix "><li class="part-title">The Basics</li><li class="chapter-item expanded "><a href="../boardrepr/boardrepr.html" class="active"><strong aria-hidden="true">1.</strong> Board Representation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../boardrepr/keepingtrack/keepingtrack.html"><strong aria-hidden="true">1.1.</strong> Keeping Track of Pieces</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../boardrepr/keepingtrack/bitsandpieces.html"><strong aria-hidden="true">1.1.1.</strong> Bits and Pieces</a></li><li class="chapter-item expanded "><a href="../boardrepr/keepingtrack/squaringaway.html"><strong aria-hidden="true">1.1.2.</strong> Squaring Away the Code</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Move Generation</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Evaluation</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Search</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Universal Chess Interface</div></li><li class="chapter-item expanded affix "><li class="part-title">Advanced</li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> Room for Improvement</div></li><li class="chapter-item expanded affix "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="../termsandnotation.html"><strong aria-hidden="true">7.</strong> Terms and Notation</a></li><li class="chapter-item expanded affix "><a href="../further.html">Further Reading</a></li><li class="chapter-item expanded affix "><a href="../credits.html">Credits</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Chess Programming in Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="board-representation"><a class="header" href="#board-representation">Board Representation</a></h1>
+<center><strong>How do we represent chess in a way that the computer understands?</strong></center></br>
+<p>How would you answer this question?</p>
+<blockquote>
+<p><strong>FRIEND:</strong> Well, it sounds like we need to encode the rules of chess in our program.</p>
+</blockquote>
+<p>Yep, and it's important that we do it perfectly, or else our program will be buggy. It's also worth considering efficiency, since a faster chess engine is a strong one.</p>
+<blockquote>
+<p><strong>FRIEND:</strong> Well, it shouldn't be too hard. There's an 8x8 board of squares, a white and black side, each side gets eight pawns, two rooks, two bishops, two knights, a king and a queen...</p>
+</blockquote>
+<p>What about castling—</p>
+<blockquote>
+<p><strong>FRIEND:</strong> That thing where the king and rook swap places? That seems simple enou—</p>
+</blockquote>
+<p>There are two rooks.</p>
+<blockquote>
+<p><strong>FRIEND:</strong> Right, the king can castle in either direction—</p>
+</blockquote>
+<p>Not always though.</p>
+<blockquote>
+<p><strong>FRIEND:</strong> Well, the king loses castling rights if he moves, and he loses castling rights on a side if the rook on that side moves.</p>
+</blockquote>
+<p>He also can't castle temporarily if an enemy is attacking the squares that he must move through to get to his castling square.</p>
+<blockquote>
+<p><strong>FRIEND:</strong> Wait, wha—</p>
+</blockquote>
+<p>And what about promotions?</p>
+<blockquote>
+<p><strong>FRIEND:</strong> Uhhh, the pawns can upgrade to other pieces if they reach the end of the board... and there are two ends since white and black go in opposite directions—</p>
+</blockquote>
+<p>Pawns can also move two squares from their starting squares too.</p>
+<blockquote>
+<p><strong>FRIEND:</strong> Oh, yeah. Forgot about that.</p>
+</blockquote>
+<p>And pawns that move two can be diagonally captured on and only on the next turn by adjacent enemy pawns.</p>
+<blockquote>
+<p><strong>FRIEND:</strong> Huh???</p>
+</blockquote>
+<p>It's called <a href="https://en.wikipedia.org/wiki/En_passant" target="_blank"><em><em>en passant</em></em></a>.</p>
+<blockquote>
+<p><strong>FRIEND:</strong> ...</p>
+</blockquote>
+<p>Not as simple as you thought, huh?</p>
+<blockquote>
+<p><strong>FRIEND:</strong> There are a <em>lot</em> of little rules. Maybe I'll have to do a <a href="https://en.wikipedia.org/wiki/Rules_of_chess" target="_blank">refresher</a>.</p>
+</blockquote>
+<p>It's definitely worth the effort. Still, if you don't know them all, it's no big deal. I'll make sure we cover all of them on our journey. However, it will be useful to know <a href="../termsandnotation.html">some chess terminalogy and notation</a>. Let's move forward then.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../setup.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../boardrepr/keepingtrack/keepingtrack.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../setup.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../boardrepr/keepingtrack/keepingtrack.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

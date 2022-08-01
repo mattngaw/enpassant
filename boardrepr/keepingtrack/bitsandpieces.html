@@ -1,0 +1,293 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Bits and Pieces - Chess Programming in Rust</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../introductions.html">Introductions</a></li><li class="chapter-item expanded affix "><a href="../../setup.html">Setup</a></li><li class="chapter-item expanded affix "><li class="part-title">The Basics</li><li class="chapter-item expanded "><a href="../../boardrepr/boardrepr.html"><strong aria-hidden="true">1.</strong> Board Representation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../boardrepr/keepingtrack/keepingtrack.html"><strong aria-hidden="true">1.1.</strong> Keeping Track of Pieces</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../boardrepr/keepingtrack/bitsandpieces.html" class="active"><strong aria-hidden="true">1.1.1.</strong> Bits and Pieces</a></li><li class="chapter-item expanded "><a href="../../boardrepr/keepingtrack/squaringaway.html"><strong aria-hidden="true">1.1.2.</strong> Squaring Away the Code</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Move Generation</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Evaluation</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Search</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Universal Chess Interface</div></li><li class="chapter-item expanded affix "><li class="part-title">Advanced</li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> Room for Improvement</div></li><li class="chapter-item expanded affix "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="../../termsandnotation.html"><strong aria-hidden="true">7.</strong> Terms and Notation</a></li><li class="chapter-item expanded affix "><a href="../../further.html">Further Reading</a></li><li class="chapter-item expanded affix "><a href="../../credits.html">Credits</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Chess Programming in Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="bits-and-pieces"><a class="header" href="#bits-and-pieces">Bits and Pieces</a></h1>
+<p>So far we're able to represent a chessboard like this.</p>
+<pre><code class="language-text">[[_, _, _, _, p, _, _, _],            8  . . . . . . . .
+ [_, _, N, _, _, _, _, _],            7  . . . . . . . .
+ [p, _, _, _, _, _, _, _],            6  . . . . . . . .
+ [_, p, _, p, _, _, _, _],            5  . . . . . . . .
+ [_, _, _, _, _, _, _, _],   -----&gt;   4  . p . p . . . .
+ [_, _, _, _, _, _, _, _],            3  p . . . . . . .
+ [_, _, _, _, _, _, _, _],            2  . . N . . . . .
+ [_, _, _, _, _, _, _, _]]            1  . . . . p . . .
+
+                                         a b c d e f g h
+</code></pre>
+<blockquote>
+<p><strong>FRIEND:</strong> Wait, it's upside down?</p>
+</blockquote>
+<p>Yep, because index 0 in our array maps to the first rank on a chessboard.</p>
+<blockquote>
+<p><strong>FRIEND:</strong> Might have to stare at that for a while to understand it.</p>
+</blockquote>
+<pre><code class="language-text">[[a1, b1, c1, d1, e1, f1, g1, h1],
+ [a2, b2, c2, d2, e2, f2, g2, h2],
+ [a3, b3, c3, d3, e3, f3, g3, h3],
+ [a4, b4, c4, d4, e4, f4, g4, h4],
+ [a5, b5, c5, d5, e5, f5, g5, h5],
+ [a6, b6, c6, d6, e6, f6, g6, h6],
+ [a7, b7, c7, d7, e7, f7, g7, h7],
+ [a8, b8, c8, d8, e8, f8, g8, h8]]
+</code></pre>
+<blockquote>
+<p><strong>FRIEND:</strong> Ah. That helps.</p>
+</blockquote>
+<blockquote>
+<p><strong>FRIEND:</strong> You know, after some thought, this 2D array seems like a good way to check what's on a square. If I wanted to see what's on <code>c2</code>, then all I'd have to do is index using <code>Rank::Second</code> and <code>File::C</code>. But what if I wanted to ask, &quot;Is there a knight?&quot; Would I have to scan the entire 2D array?</p>
+</blockquote>
+<p>You're catching on to one of the cons of this approach. All <em>square-centric</em> approaches are good at telling you what's on a square, but not where the pieces are (at least without scanning the entire board). This specific representation method is known as a <em>mailbox</em>.<sup class="footnote-reference"><a href="#1">1</a></sup></p>
+<p>The counterpart of square-centric is <em>piece-centric</em>. Piece-centric representations are good at answering, &quot;Where are the pieces?&quot; The most common method of piece-centric representation is the <em>bitboard</em>.<sup class="footnote-reference"><a href="#2">2</a></sup> Here are some examples from the starting position of a chess game.</p>
+<pre><code class="language-text">8  . x . . . . x .         8  . . . . . . . .         8  . . . . . . . .
+7  . . . . . . . .         7  . . . . . . . .         7  . . . . . . . .
+6  . . . . . . . .         6  . . . . . . . .         6  . . . . . . . .
+5  . . . . . . . .         5  . . . . . . . .         5  . . . . . . . .
+4  . . . . . . . .         4  . . . . . . . .         4  . . . . . . . .
+3  . . . . . . . .         3  . . . . . . . .         3  . . . . . . . .
+2  . . . . . . . .         2  x x x x x x x x         6  . . . . . . . .
+1  . x . . . . x .         1  x x x x x x x x         1  . x . . . . x .
+
+   a b c d e f g h            a b c d e f g h            a b c d e f g h
+
+bitboard of knights        bitboard of white pieces   bitboard of white knights
+</code></pre>
+<blockquote>
+<p><strong>FRIEND:</strong> Whoa, these are a lot more specific than the mailbox we had earlier. Also, the pieces are symbolized by <code>x</code>'s now?</p>
+</blockquote>
+<p>Yep, bitboards are essentially a binary string, a 64-bit integer, where the ones or <code>x</code>'s represent pieces that are present, and the zeroes or periods represent the absence of pieces.</p>
+<blockquote>
+<p><strong>FRIEND:</strong> So, not an empty square.</p>
+</blockquote>
+<p>Exactly. Notice that a zero in the bitboard of white's pieces symbolizes where there <em>aren't</em> white pieces, not that there aren't any pieces at all.</p>
+<blockquote>
+<p><strong>FRIEND:</strong> I see what you're doing. If we had a bitboard for every piece, we would know where all the pieces on a chessboard are!</p>
+</blockquote>
+<p>Pretty much. There are many different ways to use bitboards to keep track of all the information we need. In this book, we'll keep track of two color bitboards (all white pieces and all black pieces), and then five piece type (<code>Role</code>) bitboards (one for each piece, except for the king<sup class="footnote-reference"><a href="#3">3</a></sup>). Let's go back to the example bitboards. If you're familiar with binary/bitwise operations, you'll find bitboards intuitive.</p>
+<pre><code class="language-text">8  . x . . . . x .         8  . . . . . . . .         8  . . . . . . . .
+7  . . . . . . . .         7  . . . . . . . .         7  . . . . . . . .
+6  . . . . . . . .         6  . . . . . . . .         6  . . . . . . . .
+5  . . . . . . . .         5  . . . . . . . .         5  . . . . . . . .
+4  . . . . . . . .    &amp;    4  . . . . . . . .    =    4  . . . . . . . .
+3  . . . . . . . .   AND   3  . . . . . . . .         3  . . . . . . . .
+2  . . . . . . . .         2  x x x x x x x x         6  . . . . . . . .
+1  . x . . . . x .         1  x x x x x x x x         1  . x . . . . x .
+
+   a b c d e f g h            a b c d e f g h            a b c d e f g h
+
+knights                    white pieces               white knights
+
+
+8  . . . . . . . .         8  x x x x x x x x         8  x x x x x x x x
+7  . . . . . . . .         7  x x x x x x x x         7  x x x x x x x x
+6  . . . . . . . .         6  . . . . . . . .         6  . . . . . . . .
+5  . . . . . . . .         5  . . . . . . . .         5  . . . . . . . .
+4  . . . . . . . .    |    4  . . . . . . . .    =    4  . . . . . . . .
+3  . . . . . . . .   OR    3  . . . . . . . .         3  . . . . . . . .
+2  x x x x x x x x         2  . . . . . . . .         6  x x x x x x x x
+1  x x x x x x x x         1  . . . . . . . .         1  x x x x x x x x
+
+   a b c d e f g h            a b c d e f g h            a b c d e f g h
+
+white pieces               black pieces               all pieces
+
+
+                           8  . . . . . . . .         8  x x x x x x x x
+                           7  . . . . . . . .         7  x x x x x x x x
+                           6  . . . . . . . .         6  x x x x x x x x
+                           5  . . . . . . . .         5  x x x x x x x x
+                      !    4  . . . . . . . .    =    4  x x x x x x x x
+                     NOT   3  . . . . . . . .         3  x x x x x x x x
+                           2  x x x x x x x x         6  . . . . . . . .
+                           1  x x x x x x x x         1  . . . . . . . .
+
+                              a b c d e f g h            a b c d e f g h
+
+                           white pieces               everything but white pieces
+</code></pre>
+<p>Just using these operations, we can access all the information we could need about the pieces on a board. At an instruction level, this is also pretty cheap—bitwise operations typically have their own instruction.</p>
+<p>To remain flexible, it's useful to have both piece-centric and square-centric representations of the board, even if they're redundant.</p>
+<blockquote>
+<p><strong>FRIEND:</strong> Fine with me. Let's start writing this in Rust!</p>
+</blockquote>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://www.chessprogramming.org/Mailbox">&quot;Mailbox&quot;, Chess Programming Wiki</a></p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p><a href="https://www.chessprogramming.org/Bitboards">&quot;Bitboards&quot;, Chess Programming Wiki</a></p>
+</div>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p>Since there is only one king on each side, we need not keep an entire bitboard for the kings. Instead we'll just keep track of two squares, one for each king.</p>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../boardrepr/keepingtrack/keepingtrack.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../../boardrepr/keepingtrack/squaringaway.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../boardrepr/keepingtrack/keepingtrack.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../../boardrepr/keepingtrack/squaringaway.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
